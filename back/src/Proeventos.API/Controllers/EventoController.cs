@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Proeventos.API.Data;
 using Proeventos.API.Models;
 
 namespace Proeventos.API.Controllers
@@ -13,22 +14,26 @@ namespace Proeventos.API.Controllers
     public class EventoController : ControllerBase
     {
         private readonly ILogger<EventoController> _logger;
+        private readonly DataContext _context;
 
-        public EventoController(ILogger<EventoController> logger)
+        public EventoController(ILogger<EventoController> logger, DataContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         [HttpGet]
         public IEnumerable<Evento> Get()
         {
-            return _evento;
+            return _context.Eventos;
         }
          [HttpGet("{id}")]
-        public IEnumerable<Evento> GetById(int id)
+        public Evento GetById(int id)
         {
-            return _evento.Where(evento => evento.EventoId == id);
+            //return _context.Eventos.Where(evento => evento.EventoId == id);
+             return _context.Eventos.FirstOrDefault(evento => evento.EventoId == id);
         }
+        
         [HttpPost]
         public string Post()
         {
@@ -45,25 +50,5 @@ namespace Proeventos.API.Controllers
             return $"Exemplo de delete {id}" ;
         }
 
-        public IEnumerable<Evento> _evento = new Evento[]{
-                new Evento(){
-                EventoId = 1,
-                Local = "São Paulo",
-                Tema = "Api .Net 5",
-                Lote = "Lote 1",
-                DataEvento = DateTime.Now.AddDays(2).ToString("dd/MM/yyyy"),
-                QtdPessoas = 25,
-                ImagemUrl = "teste.png"
-                },
-                 new Evento(){
-                EventoId = 2,
-                Local = "São Paulo",
-                Tema = "Api .Net 5",
-                Lote = "Lote 3",
-                DataEvento = DateTime.Now.AddDays(3).ToString("dd/MM/yyyy"),
-                QtdPessoas = 27,
-                ImagemUrl = "teste2.png"
-                }
-            };
     }
 }
