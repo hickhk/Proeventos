@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient ) { }
+
+  public eventos: any;
 
   ngOnInit(): void {
+    this.getEventos();
+   }
+
+  getEventos(){
+    this.http.get("https://localhost:5001/api/Eventos").subscribe(
+      response => this.eventos = response,
+      error => console.log(error)
+    );
   }
 
 }
