@@ -16,7 +16,7 @@ export class EventosComponent implements OnInit {
   modalRef?: BsModalRef;
 
 
-  constructor( private eventoService: EventoService, private modalService: BsModalService,private toastr: ToastrService) { }
+  constructor( private eventoService: EventoService, private modalService: BsModalService) { }
 
 
 
@@ -68,7 +68,6 @@ openModal(template: TemplateRef<any>): void {
 }
 
 confirm(): void {
-  this.toastr.success('O Evento foi deletado com sucesso!', 'Sucesso');
   this.modalRef?.hide();
 }
 
