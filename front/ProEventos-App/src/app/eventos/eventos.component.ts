@@ -1,5 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+
+import { Evento } from '../models/Evento';
+import { EventoService } from '../services/evento.service';
 
 @Component({
   selector: 'app-eventos',
@@ -8,10 +13,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventosComponent implements OnInit {
 
-  constructor(private http: HttpClient ) { }
+  modalRef?: BsModalRef;
 
-  public eventos: any = [];
-  public eventFilters: any = [];
+
+  constructor( private eventoService: EventoService, private modalService: BsModalService,private toastr: ToastrService) { }
+
+
+
+  public eventos: Evento[] = [];
+  public eventFilters: Evento[] = [];
   showImages: boolean = true;
   private _filterList: string = '';
 
@@ -28,29 +38,42 @@ export class EventosComponent implements OnInit {
     this.getEventos();
    }
 
-  getEventos(){
-    this.http.get("https://localhost:5001/api/Eventos").subscribe(
-      response =>
-      {
-        this.eventos = response;
-        this.eventFilters = this.eventos;
-      },
-      error => console.log(error)
-    );
-  }
+   public getEventos(){
+     this.eventoService.getEventos().subscribe(
+       (response: Evento[]) =>
+       {
+         this.eventos = response;
+         this.eventFilters = this.eventos;
+       },
+       error => console.log(error)
+     );
+   }
 
   displayImages(){
       this.showImages = !this.showImages;
   }
 
 
-private filterEvents(filterBy: string){
+private filterEvents(filterBy: string): Evento[]{
   filterBy = filterBy.toLocaleLowerCase();
   return this.eventos.filter(
     (evento: { tema: string; local: string }) =>
     evento.tema.toLocaleLowerCase().indexOf(filterBy) !== -1
     || evento.local.toLocaleLowerCase().indexOf(filterBy) !== -1
     );
+}
+
+openModal(template: TemplateRef<any>): void {
+  this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+}
+
+confirm(): void {
+  this.toastr.success('O Evento foi deletado com sucesso!', 'Sucesso');
+  this.modalRef?.hide();
+}
+
+decline(): void {
+  this.modalRef?.hide();
 }
 
 }
