@@ -1,7 +1,8 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from "ngx-spinner";
 
 import { Evento } from '../models/Evento';
 import { EventoService } from '../services/evento.service';
@@ -14,9 +15,16 @@ import { EventoService } from '../services/evento.service';
 export class EventosComponent implements OnInit {
 
   modalRef?: BsModalRef;
+  typeSelected: string;
 
-
-  constructor(private eventoService: EventoService, private modalService: BsModalService) { }
+  constructor(
+    private eventoService: EventoService,
+    private modalService: BsModalService,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService)
+    {
+      this.typeSelected = 'ball-fussion';
+    }
 
 
 
@@ -35,6 +43,14 @@ export class EventosComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 5000);
+
     this.getEventos();
    }
 
@@ -68,6 +84,7 @@ openModal(template: TemplateRef<any>): void {
 }
 
 confirm(): void {
+  this.toastr.success('Evento atualizado com sucesso!', 'Sucesso');
   this.modalRef?.hide();
 }
 
