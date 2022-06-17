@@ -43,27 +43,35 @@ export class EventosComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
     this.spinner.show();
-
-    setTimeout(() => {
-      /** spinner ends after 5 seconds */
-      this.spinner.hide();
-    }, 5000);
-
     this.getEventos();
    }
 
+
    public getEventos(){
-     this.eventoService.getEventos().subscribe(
-       (response: Evento[]) =>
-       {
-         this.eventos = response;
-         this.eventFilters = this.eventos;
-       },
-       error => console.log(error)
-     );
+    this.eventoService.getEventos().subscribe({
+      next: (eventos: Evento[]) => {
+        this.eventos = eventos;
+        this.eventFilters = this.eventos
+      },
+      error: (error: any) => {
+        this.spinner.hide();
+        this.toastr.error('Erro ao carregar os eventos!', 'Error');
+      },
+      complete: () => this.spinner.hide()
+    })
    }
+
+  //  public getEventos(){
+  //    this.eventoService.getEventos().subscribe(
+  //      (response: Evento[]) =>
+  //      {
+  //        this.eventos = response;
+  //        this.eventFilters = this.eventos;
+  //      },
+  //      error => console.log(error)
+  //    );
+  //  }
 
   displayImages(){
       this.showImages = !this.showImages;

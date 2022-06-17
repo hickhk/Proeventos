@@ -20,8 +20,6 @@ import { NavComponent } from './nav/nav.component';
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +49,6 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
      ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
