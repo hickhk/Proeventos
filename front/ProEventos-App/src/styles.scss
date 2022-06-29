@@ -13,3 +13,8 @@
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 @import '~ngx-toastr/toastr';
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~bootswatch/dist/cerulean/bootswatch";
+:root {
+    --blue: #1e90ff;
+    --white: #ffffff;
+}
