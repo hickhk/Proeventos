@@ -23,6 +23,8 @@ import { TitleComponent } from './shared/title/title.component';
 import { PerfilComponent } from './Componentes/Perfil/Perfil.component';
 import { ContatosComponent } from './Componentes/Contatos/Contatos.component';
 import { DashboardComponent } from './Componentes/Dashboard/Dashboard.component';
+import { EventoDetalheComponent } from './Componentes/eventos/evento-detalhe/evento-detalhe.component';
+import { EventoListaComponent } from './Componentes/eventos/evento-lista/evento-lista.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { DashboardComponent } from './Componentes/Dashboard/Dashboard.component'
     PerfilComponent,
     ContatosComponent,
     DashboardComponent,
+    EventoDetalheComponent,
+    EventoListaComponent,
     NavComponent,
     DateTimeFormatPipe,
     TitleComponent

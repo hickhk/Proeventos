@@ -2,15 +2,16 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
-import { Evento } from '../../models/Evento';
-import { EventoService } from '../../services/evento.service';
+import { Evento } from '../../../models/Evento';
+import { EventoService } from '../../../services/evento.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-eventos',
-  templateUrl: './eventos.component.html',
-  styleUrls: ['./eventos.component.scss']
+  selector: 'app-evento-lista',
+  templateUrl: './evento-lista.component.html',
+  styleUrls: ['./evento-lista.component.css']
 })
-export class EventosComponent implements OnInit {
+export class EventoListaComponent implements OnInit {
 
   modalRef?: BsModalRef;
   typeSelected: string;
@@ -19,7 +20,8 @@ export class EventosComponent implements OnInit {
     private eventoService: EventoService,
     private modalService: BsModalService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService)
+    private spinner: NgxSpinnerService,
+    private router: Router)
     {
       this.typeSelected = 'ball-fussion';
     }
@@ -94,6 +96,10 @@ confirm(): void {
 
 decline(): void {
   this.modalRef?.hide();
+}
+
+detalheEvento(id: number): void{
+  this.router.navigate([`/eventos/detalhe/${id}`]);
 }
 
 }

@@ -1,22 +1,22 @@
-<nav aria-label="Pró Eventos" class="navbar navbar-expand-lg navbar-light bg-light">
+<nav aria-controls="panel-1" class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container-fluid">
-        <a class="navbar-brand" routerLink="">ProEventos</a>
+        <a class="navbar-brand" aria-label="Pró Eventos" routerLink="">ProEventos</a>
         <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
         <div class="collapse navbar-collapse" id="navbarNav" [collapse]="isCollapsed" [isAnimated]="true">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto" role="navigation">
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" aria-current="Dashboard" routerLink="dashboard">Dashboard</a>
+                    <a class="nav-link" aria-label="" routerLink="dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" aria-current="Eventos" routerLink="eventos">Eventos</a>
+                    <a class="nav-link" aria-label="Eventos" routerLink="eventos">Eventos</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" aria-current="Palestrantes" routerLink="palestrantes">Palestrantes</a>
+                    <a class="nav-link" aria-label="Palestrantes" routerLink="palestrantes">Palestrantes</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" aria-current="Contatos" routerLink="contatos">Contatos</a>
+                    <a class="nav-link" aria-label="Contatos" routerLink="contatos">Contatos</a>
                 </li>
             </ul>
             <div class="collapse navbar-collapse justify-content-end">

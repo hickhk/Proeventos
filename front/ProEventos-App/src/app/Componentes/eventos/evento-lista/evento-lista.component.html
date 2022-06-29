@@ -1,7 +1,3 @@
-<app-title [titulo]="'Eventos'" [iconClass]="'fa fa-calendar-check'" [subtitulo]="'Tela de Eventos'" [botaoListar]=true></app-title>
-<hr>
-<router-outlet></router-outlet>
-<!--
 <div class="shadow-sm p-3 mb-5 bg-white rounded">
     <div class="d-flex row">
         <div class="d-flex my-2">
@@ -19,14 +15,14 @@
         </div>
 
     </div>
-    <table class="table table-striped smallImg">
+    <table class="table table-striped smallImg table-hover">
         <thead class="table-dark">
             <tr>
                 <th class="d-none d-md-table-cell">
                     <button type="button" (click)="displayImages()" class="btn btn-outline-light btn-sm">
-                <i class="{{!showImages ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
-                {{!showImages ? 'Exibir' : 'Ocultar'}}
-              </button>
+              <i class="{{!showImages ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
+              {{!showImages ? 'Exibir' : 'Ocultar'}}
+            </button>
                 </th>
                 <th>#</th>
                 <th>Tema</th>
@@ -38,7 +34,7 @@
             </tr>
         </thead>
         <tbody *ngIf="eventos && eventos.length">
-            <tr *ngFor="let evento of eventFilters">
+            <tr *ngFor="let evento of eventFilters" (click)="detalheEvento(evento.id)" class="cursor">
                 <td class="d-none d-md-table-cell">
                     <img [collapse]="!showImages" [isAnimated]="true" src="/assets/images/{{evento.imagemUrl}}" alt="{{evento.imagemUrl}}">
 
@@ -50,12 +46,9 @@
                 <td class="d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
                 <td class="d-none d-md-table-cell">{{evento.lotes[0].nome}}</td>
                 <td>
-                    <button type="button" class="btn btn-outline-success btn-sm me-md-2" tooltip="Editar">
-                  <i class="fa fa-pencil"></i>
-                </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm" tooltip="Excluir" (click)="openModal(template)">
-                  <i class="fa fa-trash"></i>
-                </button></td>
+                    <button type="button" class="btn btn-outline-danger btn-lg" tooltip="Excluir" (click)="openModal(template)">
+                <i class="fa fa-trash"></i>
+              </button></td>
             </tr>
         </tbody>
         <tfoot *ngIf="!eventos.length">
@@ -69,11 +62,10 @@
 </div>
 
 <!-- Modal -->
-<!--
 <ng-template #template>
     <div class="modal-body text-center">
         <p>Tem certeza que deseja excluir o evento?</p>
         <button type="button" class="btn btn-danger" (click)="confirm()">Sim</button>&nbsp;
         <button type="button" class="btn btn-primary" (click)="decline()">Não</button>
     </div>
-</ng-template> -->
+</ng-template>
